@@ -1,12 +1,13 @@
 from sqlalchemy import Table, Column, DateTime, Integer, Float, String, ForeignKey
-from ..base import Base
-from candidate import candidate_donor_assoc
+from sqlalchemy.orm import relationship
+from base import Base
+from models.candidate import candidate_donor_assoc
 
 class Donation(Base):
 
     #Type,LastName,FirstName,Address,City,State,Zip,PAC,Occupation,Employer,Date,Election,Election_Year,Cash_Amount,In_Kind_Amount,
     #In_Kind_Description,Candidate_FirstName,Candidate_MiddleName,Candidate_LastName,Candidate_Suffix,Committee_Name
-    __tablename__ = 'donor'
+    __tablename__ = 'donations'
     id = Column(Integer, primary_key=True)
     candidate = relationship('Candidate', secondary=candidate_donor_assoc, back_populates='donors')
     donation_type = Column(String(40), nullable=False)
@@ -24,4 +25,4 @@ class Donation(Base):
     election_year = Column(Integer)
     cash_amount = Column(Float)
     in_kind_amount = Column(Float)
-    in_kind_description = Column(String(50)) = Column(String(40))
+    in_kind_description = Column(String(50))
