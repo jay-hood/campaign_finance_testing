@@ -11,7 +11,10 @@ class Candidate(Base):
     __tablename__ = 'candidates'
     id = Column(Integer, primary_key=True)
     name_id = Column(Integer, nullable=False, unique=True)
-    name = Column(String(50), nullable=False)
+    #name = Column(String(50), nullable=False)
+    firstname = Column(String(50), nullable=False)
+    middlename = Column(String(50))
+    lastname = Column(String(50), nullable=False)
     crri_page = relationship('CRRI', uselist=False, back_populates='candidate')
     cfr_pages = relationship('CFR', back_populates='candidate')
     donors = relationship('Donation', secondary=candidate_donor_assoc, back_populates='candidate')

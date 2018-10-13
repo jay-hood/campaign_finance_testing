@@ -7,4 +7,5 @@ from base import Base
 
 engine = create_engine('sqlite:///orm/database.db')
 
+
 Base.metadata.create_all(engine)
