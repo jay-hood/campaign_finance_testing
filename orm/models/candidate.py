@@ -1,7 +1,7 @@
 from sqlalchemy import Table, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from base import Base
-from association_tables import candidate_elections_assoc
+from models.association_tables import candidate_election_assoc
 
 class Candidate(Base):
 
@@ -13,5 +13,5 @@ class Candidate(Base):
     lastname = Column(String(50), nullable=False)
     crri_page = relationship('CRRI', uselist=False, back_populates='candidate')
     cfr_pages = relationship('CFR', back_populates='candidate')
-    elections = relationship('Election', secondary=candidate_elections_assoc, back_populates='candidate')
+    elections = relationship('Election', secondary=candidate_election_assoc, back_populates='candidate')
     donations_received = relationship('Donation', back_populates='candidate')

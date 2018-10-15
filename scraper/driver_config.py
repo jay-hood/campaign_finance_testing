@@ -1,9 +1,14 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options 
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-
+#capa = DesiredCapabilities.CHROME
+#capa['pageLoadStrategy'] = 'none'
 chrome_options = Options()
-download_dir = '/home/jay/projects/python_projects/campaign_finance_scraper/out'
+download_dir = '/home/jay/projects/python_projects/campaign_finance_scraper/out/tmp'
 prefs = {'download.default_directory': download_dir,
         'download.prompt_for_download': False,
         'download.directory_upgrade': True,

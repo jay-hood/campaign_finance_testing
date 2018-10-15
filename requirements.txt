@@ -2,4 +2,4 @@ requests
 selenium
 lxml
 SQLAlchemy
-
+nameparser

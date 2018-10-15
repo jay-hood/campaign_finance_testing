@@ -11,7 +11,7 @@ class Donation(Base):
     candidate_id = Column(Integer, ForeignKey('candidates.id'))
     candidate = relationship('Candidate', back_populates='donors')
     donation_type = Column(String(40), nullable=False)
-    election_id = Column(Integer, ForeignKey('election.id'))
+    election_id = Column(Integer, ForeignKey('elections.id'))
     donor_firstname = Column(String(40))
     donor_lastname = Column(String(40))
     date_received = Column(DateTime)

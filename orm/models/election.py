@@ -7,7 +7,7 @@ class Election(Base):
     __tablename__ = 'elections'
     id = Column(Integer, primary_key=True)
     candidates = relationship('Candidate', back_populates='campaign')
-    office_id = Column(Integer, ForeignKey('office.id'), nullable=False)
+    office_id = Column(Integer, ForeignKey('offices.id'), nullable=False)
     year = Column(Integer, nullable=False)
 
     
