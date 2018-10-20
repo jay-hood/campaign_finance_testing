@@ -1,7 +1,6 @@
 import requests
 from parser import Parser
-import driver_config
-from driver_config import driver, WebDriverWait, EC, By 
+from driver_config_normal import driver, WebDriverWait, EC, By
 import time
 
 class Scraper():
@@ -10,9 +9,9 @@ class Scraper():
    
     def __init__(self, sur_letter, base_string):
         self.fetch_url = base_string.format(sur_letter)
+        driver.get(self.fetch_url)
     
     def get_candidate_view_ids(self):
-        res =  driver.get(self.fetch_url)
         html = driver.page_source
         return self.parser.parse_candidate_profile_views(html)
 
@@ -33,6 +32,9 @@ class Scraper():
     def get_cv_download_id(self):
         return self.parser.parse_csv_download_id()
 
+
+
+
 if __name__ == '__main__':
     base_string = 'http://media.ethics.ga.gov/search/Campaign/Campaign_Namesearchresults.aspx?CommitteeName=&LastName={}&FirstName=&Method=0'
     download_dir = '/home/jay/projects/python_projects/campaign_finance_scraper/out'
@@ -41,40 +43,82 @@ if __name__ == '__main__':
     candidate_profile_view_ids = [candidate_profile_view_ids[29]]
     for profile in candidate_profile_view_ids:
         try:
+            # Go to candidate page 1
             driver.find_element_by_id(profile['id']).click()
+            # get a list of ids linking to tables or candidate reports based on what the candidate has run for
             crri_list = scraper.get_campaign_reports_info()
             for crri in crri_list:
+                # Click on the link to the first thing the candidate is running for
                 driver.find_element_by_id(crri['candidate_info']).click()
+                # wait until javascript renders the table
                 WebDriverWait(driver, 10).until(
                         EC.presence_of_element_located((By.ID, scraper.get_ccr_dropdown())))
+                # click on the dropdown to expand the table
                 driver.find_element_by_id(scraper.get_ccr_dropdown()).click()
-                time.sleep(5)
+                # wait until the table becomes visible to selenium
+                WebDriverWait(driver, 10).until(
+                    EC.visibility_of_element_located((By.ID, 'ctl00_ContentPlaceHolder1_Name_Reports1_'
+                                                             'TabContainer1_TabPanel1_dgReports')))
+                # scrape ids for the report reference page javascript button ids
                 cr_list = scraper.get_campaign_contribution_report_view_ids()
                 for cr in cr_list:
-                    SAVE_NAME = '{}-{}-{}-{}-{}'.format(crri['filer_id'], crri['office_sought'], profile['firstname'],profile['lastname'],cr['report'])
+                    SAVE_NAME = '{}-{}-{}-{}-{}'.format(crri['filer_id'],
+                                                        crri['office_sought'],
+                                                        profile['firstname'],
+                                                        profile['lastname'],
+                                                        cr['report'])
                     waiter = WebDriverWait(driver, 10).until(
                             EC.presence_of_element_located((By.ID, cr['action'])))
+                    # Go to page with 'view contributions' page link
+                    # I think the issue with going back one page is that it closes the table tab
                     driver.find_element_by_id(cr['action']).click()
-                    print(scraper.get_contributions_view_id())
-                    #waiter = WebDriverWait(driver, 10).until(
-                     #       EC.presence_of_element_located((By.ID, scraper.get_contributions_view_id())))
-                    driver.implicitly_wait(5)
-                    driver.find_element_by_id(scraper.get_contributions_view_id()).click()
-                    #WebDriverWait(driver, 10). until(
-                     #       EC.presence_of_element_located((By.ID, 'ctl00_ContentPlaceHolder1_Campaign_ByContributions_RFResults2_dgContSummary')))
-                    driver.implicitly_wait(5)
-                    print(scraper.get_cv_download_id())
-                    #waiter = WebDriverWait(driver, 10).until(
-                     #       EC.presence_of_element_located((By.ID, scraper.get_cv_download_id())))
-                    print('attempting to download at ', driver.current_url)
+                    waiter = WebDriverWait(driver, 10).until(
+                           EC.presence_of_element_located((By.ID, scraper.get_contributions_view_id())))
+                    # Print that page's url
+                    print(driver.current_url)
+                    try:
+                        driver.back()
+                        # You have to have all 3 of these WebDriverWait calls or else the entire process will fail.
+                        WebDriverWait(driver, 10).until(
+                            EC.presence_of_element_located((By.ID, scraper.get_ccr_dropdown())))
+                        WebDriverWait(driver, 10).until(
+                            EC.visibility_of_element_located((By.ID, scraper.get_ccr_dropdown())))
+                        element = WebDriverWait(driver, 10).until(
+                            EC.element_to_be_clickable((By.ID, scraper.get_ccr_dropdown())))
+                        element.click()
+                        try:
+                            element = driver.find_element_by_id(scraper.get_ccr_dropdown())
+                            element.click()
+                        except Exception as e:
+                            print(e)
+                        # driver.find_element_by_id(scraper.get_ccr_dropdown()).click()
+                    except Exception as e:
+                        print('cant do it')
+                        print(e)
+                driver.back()
+            # You have to call driver.back here twice because one of the pages is actually a standalone page
+            # without the dropdown loaded.
+            driver.back()
+            driver.back()
+                    # Now the driver needs to go back to the previous page
+                    # I think you can use driver.back()
+
+
+
+                    # driver.find_element_by_id(scraper.get_contributions_view_id()).click()
+                    # WebDriverWait(driver, 10).until(
+                    #        EC.presence_of_element_located((By.ID, scraper.get_cv_download_id())))
+                    # #driver.execute_script("window.stop();")
+                    # print(driver.current_url)
+                    # print('attempting to download at ', driver.current_url)
                     
-                    #click = driver.find_element_by_id(scraper.get_cv_download_id()).click()
-                   # while not os.path.exists('{}/tmp/StateEthicsReport.csv'.format(download_dir)):
-                   #     time.sleep(1)
-                   # if os.path.isfile('{}/tmp/StateEthicsReport.csv'.format(download_dir)):
-                   #     os.rename('{}/tmp/StateEthicsReport.csv'.format(download_dir), '{}/{}'.format(download_dir, SAVE_NAME))
-                   # driver.get(current_url)
-                   # driver.find_element_by_id(scraper.get_ccr_dropdown()).click()
+                    # click = driver.find_element_by_id(scraper.get_cv_download_id()).click()
+                    # while not os.path.exists('{}/tmp/StateEthicsReport.csv'.format(download_dir)):
+                    #     time.sleep(1)
+                    # if os.path.isfile('{}/tmp/StateEthicsReport.csv'.format(download_dir)):
+                    #     os.rename('{}/tmp/StateEthicsReport.csv'.format(download_dir), '{}/{}'.format(download_dir, SAVE_NAME))
+                    # driver.get(current_url)
+                    # driver.find_element_by_id(scraper.get_ccr_dropdown()).click()
         #res = driver.get(scraper.fetch_url)
         except Exception as e:
             print(e)
