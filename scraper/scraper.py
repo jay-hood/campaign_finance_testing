@@ -1,7 +1,8 @@
 import requests
+import sys
 from parser import Parser
 from db_classes import Candidate, Report
-from driver_config_normal import driver, WebDriverWait, EC, By
+from driver_config_normal import driver, WebDriverWait, EC, By, NoSuchElementException
 import time
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -52,28 +53,42 @@ class Scraper:
                 # get a list of ids linking to tables or candidate reports based on what the candidate has run for
                 crri_list = self.get_campaign_reports_info()
                 self.iterate_crri(crri_list, profile)
-            except Exception as e:
-                print(e)
+            except NoSuchElementException as e:
+                logging.info(e)
+                sys.exit(1)
 
     def iterate_crri(self, crri_list, profile):
         for crri in crri_list:
             driver.find_element_by_id(crri['candidate_info']).click()
             # wait until javascript renders the table
             try:
+                logging.info('Waiting on ccr dropdown')
                 WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.ID, self.get_ccr_dropdown())))
-                # click on the dropdown to expand the table
-                driver.find_element_by_id(self.get_ccr_dropdown()).click()
-                # wait until the table becomes visible to selenium
+            except Exception as e:
+                logging.info("No such element found or WDW timed out.")
+                continue
+            try:
                 WebDriverWait(driver, 10).until(
                     EC.visibility_of_element_located((By.ID, 'ctl00_ContentPlaceHolder1_Name_Reports1_'
                                                              'TabContainer1_TabPanel1_dgReports')))
+            except Exception as e:
+                logging.info(e)
+            try:
+                element = WebDriverWait(driver, 10).until(
+                    EC.element_to_be_clickable((By.ID, self.get_ccr_dropdown())))
+                element.click()
+                element.click()
+            except Exception as e:
+                logging.info(e)
+            try:
                 # scrape ids for the report reference page javascript button ids
                 cr_list = self.get_campaign_contribution_report_view_ids()
                 self.iterate_crlist(cr_list, crri, profile)
             except Exception as e:
-                print(e)
-                pass
+                logging.info(e)
+        driver.back()
+        # logging.info('driver back should have clicked here.')
 
     def iterate_crlist(self, crlist, crri, profile):
         for cr in crlist:
@@ -97,10 +112,9 @@ class Scraper:
                                                                          office_sought=candidate.office_sought,
                                                                          status=candidate.status).first()
             report = Report(reference_url=url)
-            # if self.session.query(Report).filter_by(reference_url=report.reference_url).first():
-            #     pass
-            # below should be elif and above should be uncommented
-            if candidate_instance:
+            if self.session.query(Report).filter_by(reference_url=report.reference_url).first():
+                pass
+            elif candidate_instance:
                 # Don't know if this syntax is correct.
                 candidate_instance.reports.append(report)
                 self.session.commit()
@@ -109,14 +123,15 @@ class Scraper:
                 self.session.add(candidate)
                 self.session.commit()
             self.go_back_to_report_table()
-        driver.back()
+        # driver.back()
+        # driver.back()
         logging.info(driver.current_url)
 
     def close_session(self):
         try:
             self.session.close()
         except Exception as e:
-            print(e)
+            logging.info(e)
 
     def go_back_to_report_table(self):
         try:
@@ -132,7 +147,7 @@ class Scraper:
             element.click()
             element.click()
         except Exception as e:
-            print(e)
+            logging.info(e)
 
 
 

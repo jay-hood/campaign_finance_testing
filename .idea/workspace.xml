@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea9369c1-5e04-45d2-9149-0182ac5cab78" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/session_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scraper/crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/scraper/crawler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scraper/database.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scraper/db_classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/scraper/db_classes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scraper/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/scraper/database.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scraper/driver_config_normal.py" beforeDir="false" afterPath="$PROJECT_DIR$/scraper/driver_config_normal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scraper/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/scraper/parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scraper/scraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/scraper/scraper.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,47 +37,38 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="17" />
-          <entry key="py" value="8072" />
+          <entry key="py" value="8800" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="17" />
-          <entry key="Python" value="8072" />
+          <entry key="Python" value="8800" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scraper/scraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="101" column="66" selection-start-line="101" selection-start-column="66" selection-end-line="101" selection-end-column="66" />
+            <state relative-caret-position="648">
+              <caret line="147" column="25" lean-forward="true" selection-start-line="147" selection-start-column="25" selection-end-line="147" selection-end-column="25" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
-                <marker date="1540163399871" expanded="true" signature="5219:5310" ph="..." />
-                <marker date="1540163399871" expanded="true" signature="6076:6079" ph="..." />
+                <marker date="1540166170781" expanded="true" signature="5707:5805" ph="..." />
+                <marker date="1540166170781" expanded="true" signature="6578:6581" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/session_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="22" column="20" lean-forward="true" selection-start-line="19" selection-end-line="22" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scraper/crawler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="9" column="4" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+            <state relative-caret-position="216">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -98,18 +85,6 @@
                 <element signature="e#0#80#0" expanded="true" />
                 <marker date="1540143729919" expanded="true" signature="228:627" ph="..." />
                 <marker date="1540143729919" expanded="true" signature="646:1058" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scraper/driver_config_normal.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="16" column="41" lean-forward="true" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
-              <folding>
-                <element signature="e#0#30#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -151,13 +126,13 @@
         <option value="$PROJECT_DIR$/scraper/driver_config.py" />
         <option value="$PROJECT_DIR$/scraper/driver_config_none.py" />
         <option value="$PROJECT_DIR$/scraper/make_db.py" />
-        <option value="$PROJECT_DIR$/scraper/driver_config_normal.py" />
         <option value="$PROJECT_DIR$/scraper/parser.py" />
         <option value="$PROJECT_DIR$/tests/__init__.py" />
         <option value="$PROJECT_DIR$/tests/session_test.py" />
         <option value="$PROJECT_DIR$/scraper/db_classes.py" />
-        <option value="$PROJECT_DIR$/scraper/scraper.py" />
         <option value="$PROJECT_DIR$/scraper/crawler.py" />
+        <option value="$PROJECT_DIR$/scraper/driver_config_normal.py" />
+        <option value="$PROJECT_DIR$/scraper/scraper.py" />
       </list>
     </option>
   </component>
@@ -451,6 +426,13 @@
     <entry file="file://$PROJECT_DIR$/tests/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/session_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="20" lean-forward="true" selection-start-line="19" selection-end-line="22" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scraper/parser.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="749">
@@ -463,10 +445,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scraper/driver_config_normal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="41" lean-forward="true" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+        <state relative-caret-position="18">
+          <caret line="1" column="61" selection-start-line="1" selection-start-column="61" selection-end-line="1" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scraper/crawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
           <folding>
-            <element signature="e#0#30#0" expanded="true" />
+            <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -485,29 +474,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scraper/scraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="101" column="66" selection-start-line="101" selection-start-column="66" selection-end-line="101" selection-end-column="66" />
+        <state relative-caret-position="648">
+          <caret line="147" column="25" lean-forward="true" selection-start-line="147" selection-start-column="25" selection-end-line="147" selection-end-column="25" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-            <marker date="1540163399871" expanded="true" signature="5219:5310" ph="..." />
-            <marker date="1540163399871" expanded="true" signature="6076:6079" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/session_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="20" lean-forward="true" selection-start-line="19" selection-end-line="22" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scraper/crawler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="4" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <marker date="1540166170781" expanded="true" signature="5707:5805" ph="..." />
+            <marker date="1540166170781" expanded="true" signature="6578:6581" ph="..." />
           </folding>
         </state>
       </provider>
