@@ -13,7 +13,7 @@ prefs = {'download.default_directory': download_dir,
         'safebrowsing.enabled': False,
         'safebrowsing.disable_download_protection': True}
 chrome_options.add_experimental_option('prefs', prefs)
-# chrome_options.add_argument('--headless')
+chrome_options.add_argument('--headless')
 driver = webdriver.Chrome(options=chrome_options)
 driver.command_executor._commands["send_command"] = ("POST", '/session/$sessionId/chromium/send_command')
 params = {'cmd': 'Page.setDownloadBehavior', 'params': {'behavior': 'allow', 'downloadPath': download_dir}}

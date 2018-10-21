@@ -44,9 +44,9 @@ class Parser():
                 candidate_info =  tr.xpath('.//td[3]/a/@id').pop()
                 status = tr.xpath('.//td[4]/span/text()').pop()
                 cri_dict = {'filer_id': filer_id,
-                    'office_sought': office_sought,
-                    'candidate_info': candidate_info,
-                    'status': status
+                            'office_sought': office_sought,
+                            'candidate_info': candidate_info,
+                            'status': status
                     }
                 crri_list.append(cri_dict)
             except Exception as e:
