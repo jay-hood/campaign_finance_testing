@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ea9369c1-5e04-45d2-9149-0182ac5cab78" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scraper/crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/scraper/crawler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scraper/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/scraper/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scraper/driver_config_normal.py" beforeDir="false" afterPath="$PROJECT_DIR$/scraper/driver_config_normal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scraper/scraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/scraper/scraper.py" afterDir="false" />
-    </list>
+    <list default="true" id="ea9369c1-5e04-45d2-9149-0182ac5cab78" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,8 +47,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scraper/scraper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="147" column="25" lean-forward="true" selection-start-line="147" selection-start-column="25" selection-end-line="147" selection-end-column="25" />
+            <state relative-caret-position="1314">
+              <caret line="121" column="15" selection-start-line="121" selection-start-column="15" selection-end-line="121" selection-end-column="15" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
                 <marker date="1540166170781" expanded="true" signature="5707:5805" ph="..." />
@@ -474,8 +468,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scraper/scraper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="147" column="25" lean-forward="true" selection-start-line="147" selection-start-column="25" selection-end-line="147" selection-end-column="25" />
+        <state relative-caret-position="1314">
+          <caret line="121" column="15" selection-start-line="121" selection-start-column="15" selection-end-line="121" selection-end-column="15" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
             <marker date="1540166170781" expanded="true" signature="5707:5805" ph="..." />
