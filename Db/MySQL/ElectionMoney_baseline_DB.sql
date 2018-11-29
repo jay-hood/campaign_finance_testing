@@ -117,3 +117,17 @@ CREATE TABLE dbo.Contribution(
     FOREIGN KEY (ContributorId) REFERENCES Contributor(ContributorId) 
 ) ON [PRIMARY]
 GO
+
+CREATE TABLE dbo.Report(
+    ReportId int Identity(1000,1) NOT NULL,
+    ReportType nvarchar(10) NULL,
+    Year int NULL,
+    ReportFiledDate nvarchar(45) NULL, 
+    ReportReceivedBy nvarchar(20) NULL,
+    ReportReceivedDate datetime NULL,
+    CandidateId int NULL,
+    Url nvarchar(200) NULL,
+    CONSTRAINT PK_Report PRIMARY KEY CLUSTERED (ReportId),
+    FOREIGN KEY (CandidateId) REFERENCES Candidate(CandidateId)
+) ON [PRIMARY]
+GO
