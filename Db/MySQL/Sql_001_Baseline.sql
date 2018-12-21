@@ -1,3 +1,8 @@
+/*
+!!!!! WARNING !!!!!!   This script will drop your existing ElectionFunding database, causing the loss of any existing data.
+This script should only be run when a new DB is neeeded.
+*/
+
 DROP TABLE IF EXISTS Contribution;
 DROP TABLE IF EXISTS Contributor;
 DROP TABLE IF EXISTS Candidate;
