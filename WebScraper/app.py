@@ -32,7 +32,8 @@ if __name__ == '__main__':
     try:
         # Create a list of all lowercase letters and then map those to
         # The above make_cralwer function.
-        letters = [char for char in string.ascii_lowercase]
+        #letters = [char for char in string.ascii_lowercase]
+        letters = ['z']
         p = Pool(4)
         logging.info('Initializing crawlers.')
         p.map(make_crawler, letters)

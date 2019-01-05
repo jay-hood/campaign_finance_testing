@@ -1,0 +1,9 @@
+2019-01-04 21:18:44,819,819 INFO     [app.py:38] Initializing crawlers.
+2019-01-04 21:18:47,652,652 INFO     [first_pass_crawler.py:145] Navigating to Kenneth Zachary
+2019-01-04 21:18:49,508,508 DEBUG    [navigator.py:45] Message: stale element reference: element is not attached to the page document
+  (Session info: headless chrome=71.0.3578.98)
+  (Driver info: chromedriver=71.0.3578.98,platform=Linux 4.19.12-2-MANJARO x86_64)
+
+2019-01-04 21:18:49,508,508 INFO     [navigator.py:46] Element id: ctl00_ContentPlaceHolder1_NameInfo1_dlDOIs_ctl03_lnkReportInfo_DOI
+2019-01-04 21:19:10,016,16 INFO     [first_pass_crawler.py:145] Navigating to Patricia Zalewski
+2019-01-04 21:19:11,050,50 INFO     [first_pass_crawler.py:145] Navigating to Sam Zamarripa
