@@ -1,11 +1,11 @@
-#Web-Scraper
+# Web-Scraper
 
 A python based web-scraper that predominantly crawls candidate profile pages on the media.ethics.ga.gov website, collecting candidate information and information regarding campaign finance reports.
 
-# Requirements
+## Prerequisites
 Because of the extensive use of f-strings, this scraper requires the use of Python 3.6+. Specific Python packages are listed in requirements.txt.
 
-#To Run
+## To Run
 Please execute the following steps in order:
 1) Install python and its package manager, pip, to your system.
 2) Install the packages in requirements.txt.
