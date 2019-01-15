@@ -28,7 +28,8 @@ This project will be obtaining data from publicly available data sources, in a m
 
 # How Can I Help?  
 1. Add your contact info to the [Participant signup sheet](https://1drv.ms/x/s!AtPeYaX7I7aauFHgUwXqmtJD1-qE)   *(No commitment required.)*
-1. Read up on the project (this page) and [archicture](https://github.com/jay-hood/electionmoney/blob/master/Docs/Open%20Access%20Candidate%20Finance%20Data%20-%20Design%20overview%20-%202018.09.11.pdf)
+1. Access [Slack channel (electionmoney)](https://codeforatlanta.slack.com/messages/CCQMPQQ2X/   )
+1. Read up on the project (this page) and [architecture](https://github.com/jay-hood/electionmoney/blob/master/Docs/Open%20Access%20Candidate%20Finance%20Data%20-%20Design%20overview%20-%202018.09.11.pdf)
 1. Decide on an area you'd like to dig into (web-scraper, DB, data-loader, web-api);  Find the repo (see links pinned to our Slack channel), and fork it.  (Create a GitHub account if you have not already done so.)
 1. Get aquainted with [data model](https://github.com/jay-hood/electionmoney/tree/master/Db)
 1. Get your component running locally
