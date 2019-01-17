@@ -1,4 +1,4 @@
-CREATE TABLE CandidateDonationsByContributor(
+CREATE TABLE IF NOT EXISTS CandidateDonationsByContributor(
 	CandidateId int NOT NULL,
 	ContributorId int NOT NULL,
 	Amount decimal(12,2) NOT NULL,	
