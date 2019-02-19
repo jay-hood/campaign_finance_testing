@@ -9,3 +9,6 @@ venv/
 **/.vscode/**
 
 pyvenv.cfg
+
+**/*.log
+**/*.pyc
