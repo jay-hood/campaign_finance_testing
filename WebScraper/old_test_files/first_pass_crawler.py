@@ -1,7 +1,6 @@
 # Relevant imports
 
 import attr
-import string
 from models import Office, Candidate, Report
 from navigator import SeleniumNavigator
 from parsers import (SearchResultsParser,
@@ -19,27 +18,21 @@ logger = logging.getLogger('sLogger')
 @attr.s
 class FirstPassCrawler:
     session = attr.ib()
-    candidate_list = attr.ib(init=False)
+    candidate_letter = attr.ib()
     navigator = attr.ib(init=False)
-    letter = attr.ib()
 
     def __attrs_post_init__(self):
-        self.search_results_urls = \
-            [f'http://media.ethics.ga.gov/search/Campaign/Campaign_Namesearchresults.aspx?CommitteeName=&LastName={self.letter}&FirstName=&Method=0']
-        #                            'http://media.ethics.ga.gov/search/Campaign/Campaign_Namesearchresults.aspx?CommitteeName=&LastName=x&FirstName=&Method=0',
-        #                            'http://media.ethics.ga.gov/search/Campaign/Campaign_Namesearchresults.aspx?CommitteeName=&LastName=z&FirstName=&Method=0']
-        # self.search_results_urls =
-        # (f'http://media.ethics.ga.gov/search/Campaign/Campaign\
-        # _Namesearchresults.aspx?CommitteeName=&LastName={character}&FirstName=&Method=0'
-        # for character in string.ascii_lowercase)
-        logging.info(self.letter)
-        logging.info(self.search_results_urls)
-        self.navigator = SeleniumNavigator(letter=self.letter)
+        # This is the default string that is formatted to contain the given
+        # letter for this specific parser. This will (well, should) throw 
+        # an error if self.candidate_letter is improperly defined or 
+        # undefined after the class object is initialized.
+        self.url = f'http://media.ethics.ga.gov/search/Campaign/Campaign_Namesearchresults.aspx?CommitteeName=&LastName={self.candidate_letter}&FirstName=&Method=0'
+        self.navigator = SeleniumNavigator()
 
     def exit(self):
         self.session.close()
 
-# 3-1.1
+# 3-1.1: Same thingas reports and office get_or_add functions.
     def get_or_add_candidate(self, candidate):
         try:
             query_result = self.session.query(Candidate).filter_by(FilerId=candidate['FilerId'], Firstname=candidate['Firstname'], Lastname=candidate['Lastname']).first()
@@ -53,7 +46,7 @@ class FirstPassCrawler:
             self.session.rollback()
             logging.info(e)
 
-# 4.1
+# 4.1: Same thing for reports as get_or_add_office, but for reports.
     def get_or_add_report(self, report):
         try:
             query_result = self.session.query(Report).filter_by(Url=report['Url']).first()
@@ -67,7 +60,8 @@ class FirstPassCrawler:
             logging.info(e)
             self.session.rollback()
 
-# 2.1
+# 2.1: Either adds the office for which a candidate has run/is running or
+# finds that it already exists and then returns the ID of said office.
     def get_or_add_office(self, office):
         try:
             query_result = self.session.query(Office).filter_by(Name=office.Name).first()
@@ -80,7 +74,9 @@ class FirstPassCrawler:
             self.session.rollback()
             logging.info(e)
 
-# 3-2
+# 3-2: Crawls campaign finance reports tables and controls the interaction
+# with the dropdowns and buttons that expose the table to allow Selenium
+# to effectively scrape the tables and navigate to Reference Pages.
     def crawl_reports_table(self, candidate_id):
         dropdown = DropdownParser(self.navigator.page_source())
         if dropdown.parse() is not None:
@@ -106,13 +102,17 @@ class FirstPassCrawler:
             except Exception as e:
                 logging.info(e)
 
-# 3-1
+# 3-1: Essentially encapsulates the parser for the campaign registration
+# information.
     def crawl_registration_info(self, candidate):
         parser = CandidateRegistrationParser(self.navigator.page_source())
         ret_candidate = parser.parse(candidate)
         return self.get_or_add_candidate(ret_candidate)
 
-# 2
+# 2: This crawls basic data from the candidate profiles. Information like
+# the offices for which they are running, dropdown links associated with
+# each office that exposes the campaign finance reports, as well as basic
+# registration info like address, political party, etc.
     def crawl_candidate_profile(self, url, candidate):
         parser = CandidateProfileParser(self.navigator.page_source())
         for dropdown, office, current_candidate in parser.parse(candidate):
@@ -133,7 +133,9 @@ class FirstPassCrawler:
                 logging.info(e)
         self.navigator.navigate(url)
 
-# 1
+# 1: This crawls the candidate profile links for the given url parameter.
+# The SearchResultsParser parses out candidate name, bundling the name as
+# a dictionary and navigating to each candidate's individual profile page.
     def crawl_candidate_profile_links(self, url):
         self.navigator.navigate(url)
         parser = SearchResultsParser(self.navigator.page_source())
@@ -147,13 +149,15 @@ class FirstPassCrawler:
                 self.navigator.click_link(current_link)
                 self.crawl_candidate_profile(url, candidate)
             except Exception as e:
+                # Maybe include a self.navigator.navigate(url) call here in
+                # case page doesn't load correctly
                 logging.info(e)
 
-# 0
+# 0: The method called in app.py that actually executes the process of
+# running the crawler and scraping the website.
     def crawl(self):
-        for url in self.search_results_urls:
-            try:
-                self.crawl_candidate_profile_links(url)
-            except Exception as e:
-                logging.info(e)
+        try:
+            self.crawl_candidate_profile_links(self.url)
+        except Exception as e:
+            logging.info(e)
         self.navigator.close_browser()

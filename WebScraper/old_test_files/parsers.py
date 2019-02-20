@@ -11,7 +11,7 @@ loginipath = os.path.abspath(os.path.join(os.path.dirname(__file__), 'logging_co
 logging.config.fileConfig(loginipath)
 logger = logging.getLogger('sLogger')
 
-
+# All parsers inherit from this very simple abstract base class.
 @attr.s
 class AbstractParser(ABC):
     page_content = attr.ib()
@@ -20,7 +20,14 @@ class AbstractParser(ABC):
     def parse(self):
         pass
 
-
+"""Most of these parsers return lists of tuples of dictionaries.
+The vast majority of what any given parser does is take the html body
+of a given webpage, looks for very specific IDs, gets the information
+from them, bundles that data into said dictionaries, and then bundles
+them further into tuples that are added to lists. There are, of course,
+exceptions and specific functionality to each parser that will be defined
+in later comments to be added, but that is the general flow of any given
+parser."""
 class CandidateProfileParser(AbstractParser):
 
     def status_to_int(self, status):
@@ -34,14 +41,15 @@ class CandidateProfileParser(AbstractParser):
             return 3
 
     def parse(self, candidate):
-        xpath_ = "//*[@id='ctl00_ContentPlaceHolder1_NameInfo1_dlDOIs']/tbody/tr[@class!='gridviewheader']" 
+        xpath_ = "//*[@id='ctl00_ContentPlaceHolder1_NameInfo1_dlDOIs']/tbody/tr[@class!='gridviewheader']"
         tree = html.fromstring(self.page_content)
         # Body being generated with this xpath is empty list.
         body = tree.xpath(xpath_)
         dropdowns_list = []
         candidates_list = []
         offices_list = []
-        # This condition is specifically to handle Account, Deleted profiles.
+        # This condition is specifically to handle Account,
+        # Deleted profiles, etc.
         if not body:
             candidate['FilerId'] = 'No filer ID'
             candidate['CandidateStatus'] = 0
@@ -64,13 +72,13 @@ class CandidateProfileParser(AbstractParser):
             except Exception as e:
                 logging.info(e)
 
-        return ((dropdown, office, candidate) for dropdown, office, candidate 
+        return ((dropdown, office, candidate) for dropdown, office, candidate
                 in zip(dropdowns_list, offices_list, candidates_list))
 
 
 class DropdownParser(AbstractParser):
 
-    def parse(self): 
+    def parse(self):
         xpath_ = '//*[@id="ctl00_ContentPlaceHolder1_Name_Reports1_TabContainer1_TabPanel1_Label2"]'
         tree = html.fromstring(self.page_content)
         body = tree.xpath(xpath_)
@@ -111,7 +119,7 @@ class SearchResultsParser(AbstractParser):
                 link_ids.append(js_id)
             except Exception as e:
                 logging.info(e)
-        return [(cand, link_id) for cand, link_id in zip(candidates, link_ids)] 
+        return [(cand, link_id) for cand, link_id in zip(candidates, link_ids)]
 
 
 class CandidateRegistrationParser(AbstractParser):
@@ -175,6 +183,8 @@ class ReportsTableParser(AbstractParser):
                 report_received_by = tr.xpath('.//td[5]/span/text()').pop()
                 report_received_date = tr.xpath('.//td[6]/span/text()').pop()
                 links.append(link)
+                # replace report with dict and do the same thing as with
+                # the candidate class
                 report = copy.copy(report)
                 report['ReportType'] = report_type
                 report['Year'] = year
@@ -195,7 +205,7 @@ class ContributionsViewParser(AbstractParser):
         body = tree.xpath(xpath_)
         if not body:
             return None
-        return id_ 
+        return id_
 
 
 class CSVLinkParser(AbstractParser):

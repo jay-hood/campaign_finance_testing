@@ -12,19 +12,17 @@ loginipath = os.path.abspath(
     os.path.join(os.path.dirname(__file__), 'logging_config.ini'))
 
 logging.config.fileConfig(loginipath)
-logger = logging.getLogger('fLogger')
+logger = logging.getLogger('sLogger')
 
 
-@attr.s(kw_only=True)
+@attr.s
 class SeleniumNavigator():
-    
-    letter = attr.ib()
     loading_strategy = attr.ib(default='normal')
     driver = attr.ib(init=False)
 
     def __attrs_post_init__(self):
         try:
-            DC = DriverConfig(self.letter, headless=True)
+            DC = DriverConfig(self.loading_strategy, headless=True)
             self.driver = DC.get_driver()
         except Exception as e:
             logging.info(e)

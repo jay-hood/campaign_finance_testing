@@ -8,14 +8,19 @@ loginipath = os.path.abspath(os.path.join(os.path.dirname(__file__), 'logging_co
 logging.config.fileConfig(loginipath)
 logger = logging.getLogger('sLogger')
 
-
 @attr.s
 class DriverConfig:
-
-    letter = attr.ib(default='csv')
+    """ As much of the Georgia campaign finance website's html
+    is javascript generated, we have to set a loading strategy based
+    on the requirements of each individual crawler. For the first_pass
+    crawler, we need a normal loading strategy. As such we define normal
+    as the default. It is only to use the second_pass_cralwer that the
+    loading strategy must be set to None. The options below in get_driver
+    are used to configure the driver to allow for the downloading of files,
+    something that the webdriver normally cannot do for security reasons"""
     loading_strategy = attr.ib(default='normal')
     headless = attr.ib(default=True)
-
+    
     def get_driver(self):
         chrome_options = Options()
         capa = DesiredCapabilities.CHROME
@@ -24,15 +29,11 @@ class DriverConfig:
                 chrome_options.add_argument('--headless')
         else:
             raise TypeError
-        if isinstance(self.loading_strategy, str) and \
-           (self.loading_strategy.lower() is 'normal' or 'none'):
+        if isinstance(self.loading_strategy, str) and (self.loading_strategy.lower() is 'normal' or 'none'):
             capa['pageLoadStrategy'] = self.loading_strategy.lower()
         else:
             raise ValueError
-        download_dir = \
-            os.path.abspath(os.path.join(os.path.dirname(__file__),\
-                                         self.letter))
-
+        download_dir = '/home/jay/projects/python_projects/revised-cfs/csv'
         prefs = {'download.default_directory': download_dir,
                  'download.prompt_for_download': False,
                  'download.directory_upgrade': True,
