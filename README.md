@@ -8,7 +8,7 @@ Sponsor: [New Georgia Project](https://newgeorgiaproject.org/)
 
 Affiliation: [Code for Atlanta](https://www.codeforatlanta.org/)
 
-Project status: Research & planning
+Project status: Development
 
 **Project Summary**
 The purpose of this project is to collect data from public, Georgia goverment webistes, and present the data in a more useful and helpful manner as an API, with the eventual goal of providing input for end-user apps that can easily let non-technical people have clear access to the publicly reported funding sources for Georgia politicians.  This project is what you might call "Phase I" of a longer vision.  Here we are just obtaining and exposing data via a web-api (RESTful interface), that client apps will be able to use.  Once done, this will open several opportunities for using the data, such as mobile apps, reports & data analysis, but all of those are outside the scope of this project.  This project is strictly about obtaining and exposing the data via a web-api, and any steps along the way to achieving that goal.
@@ -26,19 +26,26 @@ The purpose of this project is to collect data from public, Georgia goverment we
 **Disclaimer**
 This project will be obtaining data from publicly available data sources, in a manner that is consistent with state and federal law.  
 
-**Interested in joining us?**  [Participant signup sheet](https://1drv.ms/x/s!AtPeYaX7I7aauFHgUwXqmtJD1-qE)   *(No commitment required.)*
+# How Can I Help?  
+1. Add your contact info to the [Participant signup sheet](https://1drv.ms/x/s!AtPeYaX7I7aauFHgUwXqmtJD1-qE)   *(No commitment required.)*
+1. Access [Slack channel (electionmoney)](https://codeforatlanta.slack.com/messages/CCQMPQQ2X/   )
+1. Read up on the project (this page) and [architecture](https://github.com/jay-hood/electionmoney/blob/master/Docs/Open%20Access%20Candidate%20Finance%20Data%20-%20Design%20overview%20-%202018.09.11.pdf)
+1. Decide on an area you'd like to dig into (web-scraper, DB, data-loader, web-api);  Find the repo (see links pinned to our Slack channel), and fork it.  (Create a GitHub account if you have not already done so.)
+1. Get aquainted with [data model](https://github.com/jay-hood/electionmoney/tree/master/Db)
+1. Get your component running locally
+1. Create Trello account & check out the [Trello board](https://trello.com/b/Svpr07oa/election-money)
+1. Find task on Trello board ("Requirements - Ready for Dev" section) and dig in!
+1. (Make sure to fully test your code.)
+1. Submit Pull Request when ready to submit.
 
-Note to participants: If you'd like to recommend a special tool or technology, please read over the project description first to get a good understanding of what we're trying to do, then write up a summary page with the following info and post it on our Slack channel:
-1. Description of the tool/technology.  And it's cost (Very important, since we're currently a $0 budget project).
-1. Explain pros & cons of using it.
-1. Explain which problem in this project it would solve.  Note: If you expand the scope of the project to answer this question, you're cheating. :)
+
 
 **Need access?** Contact Wayne Schroder at GratefulBayou@gmail.com, or message me on the slack channel.
 
 ## Goals
-
-## Technology
-TBD
+1. Pull data from Georgia Ethics Media website.  Extract/transform/load/store as needed.
+1. Aggregate data to identify top contributors per candidate
+1. Expose web api providing top contributors for given candidate
 
 ## Data Sources
 
@@ -56,11 +63,6 @@ To see campaign reports:
    1. Click on "Click here to export the result to Excel"
 
 ## Short Term Needs
-1. Analyze and document candidate funding data from media.ethics.ga.gov.  Metadata needed:
-   - Dataset name
-   - Field name
-   - Field type & length
-   - Special values
    
 ## Project Roadmap
 TBD

@@ -1,7 +1,5 @@
-from sqlalchemy import Column, Sequence, String, Numeric, Integer, ForeignKey, DateTime 
+from sqlalchemy import Column, Sequence, String, Numeric, Integer, ForeignKey, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.schema import CreateTable
-from sqlalchemy.dialects import postgresql
 
 Base = declarative_base()
 
@@ -62,7 +60,7 @@ class Log(Base):
     ServerName = Column(String(1000))
     Logger = Column(String(250))
     Callsite = Column(String(50))
-    _Exception = Column(String(50))
+    Exception = Column(String(50))
 
 
 class Office(Base):
@@ -74,11 +72,11 @@ class Office(Base):
 class Report(Base):
     __tablename__ = 'Report'
     ReportId = Column(Integer, primary_key=True)
-    ReportType = Column(String(45))
+    ReportType = Column(String(100))
     Year = Column(Integer)
-    ReportFiledDate = Column(String(45))
-    ReportReceivedBy = Column(String(45))
-    ReportReceivedDate = Column(String(45))
+    ReportFiledDate = Column(String(100))
+    ReportReceivedBy = Column(String(100))
+    ReportReceivedDate = Column(String(100))
     CandidateId = Column(Integer, ForeignKey('Candidate.CandidateId'))
     Url = Column(String(200))
 
@@ -94,35 +92,12 @@ class ScrapeLog(Base):
     ReportId = Column(Integer, ForeignKey('Report.ReportId'))
 
 
-class CSV(Base):
-    __tablename__ = 'CSV'
-    CSVId = Column(Integer, primary_key=True)
-    FilerID = Column(String(200))
-    Type = Column(String(200))
-    LastName = Column(String(200))
-    FirstName = Column(String(200))
-    Address = Column(String(200))
-    City = Column(String(200))
-    State = Column(String(200))
-    Zip = Column(String(200))
-    PAC = Column(String(200))
-    Occupation = Column(String(200))
-    Employer = Column(String(200))
-    Date = Column(DateTime)
-    Election = Column(String(200))
-    Election_Year = Column(String(200))
-    Cash_Amount = Column(Numeric(10, 2))
-    In_Kind_Amount = Column(Numeric(10, 2))
-    In_Kind_Description = Column(String(200))
-    Candidate_FirstName = Column(String(200))
-    Candidate_MiddleName = Column(String(200))
-    Candidate_LastName = Column(String(200))
-    Candidate_Suffix = Column(String(200))
-    Committee_Name = Column(String(200))
-
-
 if __name__ == '__main__':
     try:
+        # The below should be changed to suit individual database needs,
+        # For example, psycopg2 would need to be replaced by whatever
+        # MySQL helper package you installed in order to build the database
+        # in a MySQL DB.
         import psycopg2
         from sqlalchemy import create_engine
         engine = create_engine('postgresql+psycopg2:///TestDB')

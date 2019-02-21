@@ -89,4 +89,17 @@ CREATE TABLE Contribution(
     FOREIGN KEY (CandidateId) REFERENCES Candidate(CandidateId), 
     FOREIGN KEY (ScrapeLogId) REFERENCES ScrapeLog(ScrapeLogId),
     FOREIGN KEY (ContributorId) REFERENCES Contributor(ContributorId) 
-); 
+);
+
+CREATE TABLE Report(
+    ReportId int NOT NULL,
+    CandidateId int NOT NULL,
+    ReportType nvarchar(100) NULL,
+    Year int NULL,
+    ReportFileDate DateTime NULL,
+    ReportReceivedBy nvarchar(50) NULL,
+    ReportReceivedDate DateTime NULL,
+    Url nvarchar(500) NULL,
+    CONSTRAINT PK_Contribtuor PRIMARY KEY CLUSTERED(ReportId),
+    FOREIGN KEY (CandidateId) REFERENCES Candidate(CandidateId)
+);
