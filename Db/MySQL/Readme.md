@@ -7,7 +7,7 @@ The SQL scripts in this folder are intended to be run in sequence, first creatin
 If you are developing a component on your local machine, you should install a local instance of MySQL database server on your machine, with a copy of the ElectionMoney database, to support your development work.  The following steps can be used to get that set up.
 _(Note: This is just a rough draft of the installation steps, and needs to be verified/cleaned up.)_
 
-1. Download and install MySQL community edition (no need to register with Oracle)
+1. Download and install [MySQL community edition](https://dev.mysql.com/downloads/mysql/) (no need to register with Oracle)
 1. Download and install MySQL Workbench
 1. Open MySQL Workbench
 1. Create connection to your local MySQL server
