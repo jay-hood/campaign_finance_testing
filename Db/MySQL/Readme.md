@@ -8,7 +8,7 @@ If you are developing a component on your local machine, you should install a lo
 _(Note: This is just a rough draft of the installation steps, and needs to be verified/cleaned up.)_
 
 1. Download and install [MySQL community edition](https://dev.mysql.com/downloads/mysql/) (no need to register with Oracle)
-1. Run through installation steps for MySQL server [for Windows](https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html)
+1. Run through installation steps for MySQL server (Click [here for Windows](https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html) installer)
 1. Download and install MySQL Workbench
 1. Open MySQL Workbench
 1. Create connection to your local MySQL server
