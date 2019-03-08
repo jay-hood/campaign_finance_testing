@@ -4,6 +4,7 @@ A python based web-scraper that predominantly crawls candidate profile pages on 
 
 ## Prerequisites
 Because of the extensive use of f-strings, this scraper requires the use of Python 3.6+. Specific Python packages are listed in requirements.txt.
+The web-scraper is built using Python and Selenium. For more info, [click here](https://selenium-python.readthedocs.io/).
 
 ## To Run
 Please execute the following steps in order:
