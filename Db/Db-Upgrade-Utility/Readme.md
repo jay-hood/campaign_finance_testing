@@ -23,6 +23,7 @@ Although the details will vary, here's the general recipe for a DB Upgrade Utili
    1. ...and so on...
 1. Database upgrades will be applied to the DB as part of the same delivery pipeline as code, so when an application update is deployed, it will include both code and DB upgrades. 
 1. The DB upgrades will be handled by running a DB Upgrade Utility, which will pull the latest copies of the DB upgrade scripts, determine which ones need to be run, and automatically run them.
+1. The DB upgrade utility must callable from a command prompt (in other words, not a web page or mobile app)
 1. The DB should contain a "versions" table, where every row in the table represents an incremental update to the DB, identified by a single SQL script.
    1. Version table should include at least the following info:  Script name, version #, date/time applied, hash of script at the time it was applied.
 
