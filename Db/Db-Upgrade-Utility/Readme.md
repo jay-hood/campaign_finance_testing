@@ -8,6 +8,13 @@ The only time DDL should be used is when authorized, controlled DB upgrade scrip
 
 ## Overview
 Although the details will vary, here's the general recipe for a DB Upgrade Utility.
+1. A basic utility that can be called at any time
+1. It checks for script files in a given location
+1. Checks the Versions table in a DB to see which have already been applied
+1. Runs any new scripts against that DB.  
+1. Inserts a new row into the Versions table for each script applied.
+
+## Requirements
 1. All DB upgrades (DDL) handled through SQL scripts (probably stored in a GitHub repo, but other options are possible).  The first SQL script for the baseline for the database, creating the primary tables.  Additional scripts represent incremental delta changes (e.g. adding tables, adding columns, increasing column widths, etc.)  Anytime a change is needed to the DB structure, the DDL is written as a SQL script that can be applied to the DB, to make that change.
 1. The SQL scripts should follow a naming convention that clearly indicates their sequence, e.g.  
    1. SQL_update_001_Baseline.sql
@@ -23,4 +30,5 @@ Although the details will vary, here's the general recipe for a DB Upgrade Utili
 1. Use a hash to identify if the script has changed, and re-apply if so?  This would allow us the option of fixing a script that has a problem.  (Should be rare, but possible.)
 
 ## Limitations / Exclusions
-1. This story only involves the creation of the utility, which should be callable independently.  It does not include fitting it into the deployment pipeline.  The description above (deploying Db updates in conjunction with code updates) is given simply to provide context, to help people see how the DB utility will be used.  A separate story will be needed to fit this utility into the deployment process.
+1. This story only involves the creation of the utility, which should be callable independently.  It does not include fitting it into the deployment pipeline.  The description above (deploying Db updates in conjunction with code updates) is given simply to provide context, to help people see how the DB utility will be used.  A separate story will be needed to fit this utility into the deployment process.  
+
